@@ -1,0 +1,46 @@
+{
+  "name": "rasad-extended-demo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "dev:clean": "rm -rf .next && next dev -p 3001",
+    "build": "next build",
+    "start": "next start -p 3001",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "build:mock": "node scripts/build-mock.mjs",
+    "predev": "npm run build:mock",
+    "prebuild": "npm run build:mock"
+  },
+  "engines": {
+    "node": ">=22",
+    "yarn": ">=1.22.19"
+  },
+  "dependencies": {
+    "axios": "^1.2.1",
+    "lucide-react": "^1.49.0",
+    "next": "13.5.6",
+    "ol": "^7.5.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-query": "^3.39.2",
+    "react-toastify": "^9.1.1",
+    "sweetalert2": "^11.19.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "18.11.15",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.13",
+    "buffer": "^6.0.3",
+    "esbuild": "^0.28.2",
+    "eslint": "^8.49.0",
+    "eslint-config-next": "13.5.6",
+    "fflate": "^0.8.3",
+    "postcss": "^8.4.20",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^5.7.3"
+  }
+}

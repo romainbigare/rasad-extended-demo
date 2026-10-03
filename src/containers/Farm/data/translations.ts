@@ -1,0 +1,345 @@
+import type { LandUseClass } from "@/lib/analytics/types";
+import type { Dict } from "@/lib/i18n/createDict";
+
+export const STRINGS = {
+  pageTitle: { en: "Farm Performance", ar: "أداء المزارع" },
+
+  // FarmMapPanel
+  farmSelectorEmptyOption: { en: "No farms in this region", ar: "لا توجد مزارع في هذه المنطقة" },
+  mapCardTitle: { en: "Farm map", ar: "خريطة المزارع" },
+  farmLayerLabel: { en: "Farm boundaries", ar: "حدود المزارع" },
+  farmLayerDesc: { en: "Farms and holdings", ar: "المزارع والحيازات" },
+  fieldLayerLabel: { en: "Field parcels", ar: "قطع الحقول" },
+  fieldLayerDesc: { en: "Cadastral parcels", ar: "القطع المساحية" },
+  hriLabel: { en: "HRI imagery", ar: "صور عالية الدقة (HRI)" },
+  hriDesc: { en: "Satellite base", ar: "أساس فضائي" },
+  thematicClassificationLabel: { en: "Colour by", ar: "التلوين حسب" },
+  thematicNoneLabel: { en: "None", ar: "بدون" },
+  plotMarkersLoading: { en: "Loading plots…", ar: "جارٍ تحميل القطع…" },
+  plotTooltipFarmTemplate: { en: "Farm {uid}", ar: "المزرعة {uid}" },
+  plotTooltipLoading: { en: "Loading breakdown…", ar: "جارٍ تحميل التفاصيل…" },
+  plotTooltipError: {
+    en: "This farm's breakdown isn't available right now. Please check back later.",
+    ar: "تفاصيل هذه المزرعة غير متاحة حاليًا. يرجى المحاولة لاحقًا.",
+  },
+  plotTooltipEmpty: { en: "No land use, crop or tree records for this farm.", ar: "لا توجد سجلات استخدام أراضٍ أو محاصيل أو أشجار لهذه المزرعة." },
+  plotTooltipArea: { en: "Area", ar: "المساحة" },
+  plotTooltipClose: { en: "Close", ar: "إغلاق" },
+  thematicSelectAll: { en: "Select all", ar: "تحديد الكل" },
+  thematicSelectNone: { en: "Clear", ar: "مسح" },
+  thematicExpand: { en: "Show {name}", ar: "عرض {name}" },
+  thematicCollapse: { en: "Hide {name}", ar: "إخفاء {name}" },
+  clearAllButton: { en: "Clear all", ar: "مسح الكل" },
+  fitToSelectionButton: { en: "Fit to selection", ar: "ملاءمة مع التحديد" },
+  fieldsPanelFarmLabel: { en: "Farm", ar: "المزرعة" },
+  collapseFieldsPanel: { en: "Collapse fields panel", ar: "طي لوحة الحقول" },
+  expandFieldsPanel: { en: "Expand fields panel", ar: "توسيع لوحة الحقول" },
+  loadingParcelsText: { en: "Loading fields…", ar: "جارٍ تحميل الحقول…" },
+  parcelsErrorMessage: {
+    en: "This farm's fields aren't available right now. Please check back later.",
+    ar: "حقول هذه المزرعة غير متاحة حاليًا. يرجى المحاولة لاحقًا.",
+  },
+  noParcelsMapped: { en: "No fields registered for this farm.", ar: "لا توجد حقول مسجّلة لهذه المزرعة." },
+  noCropLabel: { en: "None", ar: "لا يوجد" },
+
+  // Plain muted count next to the Farm map title.
+  mapLayersCount: { en: "{n} layers", ar: "{n} طبقات" },
+  // Thematic overlay labels (wmsOverlays.THEMATIC_OVERLAYS, keyed by layer.key)
+  thematicLabelLandUse: { en: "Land use", ar: "استخدام الأراضي" },
+  thematicLabelCropType: { en: "Crop type", ar: "نوع المحصول" },
+  thematicLabelTreeType: { en: "Tree type", ar: "نوع الشجرة" },
+  thematicLabelStructures: { en: "Structures", ar: "المنشآت" },
+
+  // Thematic overlay descriptions (FarmMapPanel.THEMATIC_DESCRIPTIONS, keyed by layer.key)
+  thematicDescLandUse: { en: "Open Ag · Barren · Protected · Built", ar: "زراعة مفتوحة · أراضٍ بور · محمية · مبانٍ" },
+  thematicDescCropType: { en: "Date Palm · Rhodes Grass · Vegetables", ar: "نخيل التمر · حشيشة الرودس · خضروات" },
+  thematicDescTreeType: { en: "Date Palm · Forest · Olive · Fruits", ar: "نخيل التمر · أشجار الغابات · زيتون · فواكه" },
+  thematicDescStructures: { en: "Greenhouses · Sheds · Tanks · Solar", ar: "بيوت محمية · مظلات · خزانات · طاقة شمسية" },
+
+  // Thematic overlay counts (right of each "Colour by" row); {n} = the layer's selectable classes.
+  thematicBadgeLandUse: { en: "{n} classes", ar: "{n} فئات" },
+  thematicBadgeCropType: { en: "{n} crops", ar: "{n} محاصيل" },
+  thematicBadgeTreeType: { en: "{n} types", ar: "{n} أنواع" },
+  thematicBadgeStructures: { en: "{n} classes", ar: "{n} فئات" },
+
+  landUseOpenAgriculture: { en: "Open agriculture", ar: "زراعة مفتوحة" },
+  landUseProtectedAgriculture: { en: "Protected agriculture", ar: "زراعة محمية" },
+  landUseStructures: { en: "Structures", ar: "منشآت" },
+  landUseBarrenLand: { en: "Barren land", ar: "أرض بور" },
+  landUseFallowLand: { en: "Fallow land", ar: "أرض مُراحة" },
+
+  // FarmMapCanvas
+  mapLoadingPrefix: { en: "Loading", ar: "جارٍ تحميل" },
+  mapLoadingFarmBoundaries: { en: "farm boundaries", ar: "حدود المزارع" },
+  mapLoadingFieldBoundaries: { en: "field boundaries", ar: "حدود الحقول" },
+  mapLoadingJoiner: { en: "&", ar: "و" },
+  selectedFarmTemplate: { en: "Selected: Farm {uid}", ar: "المحددة: مزرعة {uid}" },
+
+  // Distribution cards (CropTypeSection)
+  viewBreakdownLabel: { en: "View breakdown", ar: "عرض التفصيل" },
+  hideBreakdownLabel: { en: "Hide breakdown", ar: "إخفاء التفصيل" },
+  breakdownEmpty: { en: "No sub-classes recorded for this class yet.", ar: "لا توجد فئات فرعية مسجّلة لهذه الفئة بعد." },
+  breakdownColFarm: { en: "Farm", ar: "المزرعة" },
+  breakdownColPlanted: { en: "Planted ({unit})", ar: "المساحة المزروعة ({unit})" },
+  breakdownColShareOfFarm: { en: "Share of farm", ar: "الحصة من المزرعة" },
+  breakdownColFields: { en: "Fields", ar: "الحقول" },
+  searchByCropPlaceholder: { en: "Search by farm or crop", ar: "البحث حسب المزرعة أو المحصول" },
+  cropBreakdownTitleTemplate: { en: "Farms growing {crop}", ar: "المزارع التي تزرع {crop}" },
+  distSearchTooltip: { en: "Search", ar: "بحث" },
+  distCsvTooltip: { en: "Download CSV", ar: "تنزيل CSV" },
+  distGeoJsonTooltip: { en: "Download GeoJSON", ar: "تنزيل GeoJSON" },
+  geoJsonExportError: {
+    en: "GeoJSON export isn't available yet. Try CSV.",
+    ar: "تصدير GeoJSON غير متاح بعد. جرّب CSV.",
+  },
+  csvButtonLabel: { en: "CSV", ar: "CSV" },
+  csvPreparingLabel: { en: "Preparing…", ar: "جارٍ التحضير…" },
+  csvExportError: {
+    en: "Couldn't prepare the CSV export. Try again.",
+    ar: "تعذّر تجهيز تصدير CSV. حاول مرة أخرى.",
+  },
+  noClassMatchesTemplate: { en: "No class matches “{term}”.", ar: "لا توجد فئة مطابقة لـ ”{term}“." },
+
+  // LandUseDistributionSection / TreeDistributionSection (module pages)
+  breakdownColArea: { en: "Area ({unit})", ar: "المساحة ({unit})" },
+  breakdownColFarms: { en: "Farms", ar: "المزارع" },
+  breakdownColParcels: { en: "Parcels", ar: "القطع" },
+  breakdownColShare: { en: "Share", ar: "الحصة" },
+  breakdownColSubClass: { en: "Sub-class", ar: "الفئة الفرعية" },
+  breakdownColTrees: { en: "Trees", ar: "الأشجار" },
+  breakdownColVariety: { en: "Variety", ar: "الصنف" },
+  breakdownTitleTemplate: { en: "{class} · sub-classes", ar: "{class} · الفئات الفرعية" },
+  kpiTreesUnit: { en: "trees", ar: "شجرة" },
+  landUseDistCardSubtitle: {
+    en: "Select a class to break it down by sub-class",
+    ar: "اختر فئة لتفصيلها حسب الفئة الفرعية",
+  },
+  landUseDistCardTitle: { en: "Area by land use", ar: "المساحة حسب استخدام الأرض" },
+  searchByClassPlaceholder: { en: "Search by class", ar: "البحث حسب الفئة" },
+  searchByTreeTypePlaceholder: { en: "Search by tree type", ar: "البحث حسب نوع الشجرة" },
+  treeBreakdownTitleTemplate: { en: "{type} · varieties", ar: "{type} · الأصناف" },
+  treeCanopyAreaTemplate: {
+    en: "Segments show share of {area} {unit} of tree canopy area",
+    ar: "تُظهر الأجزاء الحصة من {area} {unit} من مساحة مظلة الأشجار",
+  },
+  treeDistCardSubtitle: {
+    en: "Select a tree type to break it down by variety",
+    ar: "اختر نوع شجرة لتفصيله حسب الصنف",
+  },
+  treeDistCardTitle: { en: "Trees by type", ar: "الأشجار حسب النوع" },
+  treeSegmentDatePalm: { en: "Date palms", ar: "نخيل التمر" },
+  treeSegmentForest: { en: "Forest trees", ar: "أشجار الغابات" },
+  treeSegmentFruit: { en: "Fruit trees", ar: "أشجار الفاكهة" },
+  treeSegmentOlive: { en: "Olive", ar: "زيتون" },
+
+  // CropTypeSection
+  cropCardTitle: { en: "Crops this season", ar: "محاصيل هذا الموسم" },
+  cropCardSubtitle: {
+    en: "Select a crop to see the farms growing it",
+    ar: "اختر محصولًا لعرض المزارع التي تزرعه",
+  },
+  cropCenterCaption: { en: "crops", ar: "محاصيل" },
+  cropNoData: { en: "No crops assigned to fields yet.", ar: "لم تُعيَّن محاصيل للحقول بعد." },
+
+  // OperationalDeepDivesSection
+  // Seasonal Crop Monitoring card (advisories KPI).
+  deepDiveSeasonalTitle: { en: "Seasonal Crop Monitoring", ar: "مراقبة المحاصيل الموسمية" },
+  deepDiveSeasonalSub: { en: "farms with active advisory", ar: "مزرعة ذات إرشاد فعّال" },
+  deepDiveIerTitle: { en: "Irrigation Efficiency Rating", ar: "تصنيف كفاءة الري" },
+  deepDiveIerSub: { en: "farms rated low", ar: "مزرعة مصنّفة منخفضة" },
+  // IER card's second line and average badge, written here from the raw numbers (see ierText).
+  deepDiveIerScored: { en: "{count} farms scored", ar: "{count} مزرعة مُقيَّمة" },
+  deepDiveIerAverage: { en: "Avg IER {score}", ar: "متوسط IER {score}" },
+  deepDiveYieldTitle: { en: "Yield Forecast", ar: "توقعات الإنتاجية" },
+  deepDiveYieldSub: { en: "tonnes", ar: "طن" },
+  deepDiveTreeHealthTitle: { en: "Tree Health", ar: "صحة الأشجار" },
+  deepDiveTreeHealthSub: { en: "trees stressed or critical", ar: "شجرة متعبة أو في حالة حرجة" },
+  deepDiveTreeHealthScored: { en: "{count} palms scored", ar: "{count} نخلة مُقيَّمة" },
+  deepDiveTreeHealthAverage: { en: "average score {score}", ar: "متوسط النتيجة {score}" },
+  deepDiveTreeHealthAsOf: { en: "as of {date}", ar: "حتى {date}" },
+  deepDiveTreeHealthStressed: { en: "Stressed {count}", ar: "متعبة {count}" },
+  deepDiveTreeHealthCritical: { en: "Critical {count}", ar: "حرجة {count}" },
+  deepDiveStructuresTitle: { en: "Agricultural Structure Detection", ar: "رصد المنشآت الزراعية" },
+  deepDiveStructuresSub: { en: "Detected structure footprint", ar: "المساحة المكتشفة للمنشآت" },
+  structuresFarmsTemplate: { en: "{count} farms with detected structures", ar: "{count} مزرعة بها منشآت مكتشفة" },
+  structuresLargestHoldingTemplate: { en: "largest holding {farm} at {area} {unit}", ar: "أكبر حيازة {farm} بمساحة {area} {unit}" },
+  structuresLargestStructureTemplate: { en: "Largest structure: {type} · {area} {unit}", ar: "أكبر منشأة: {type} · {area} {unit}" },
+  deepDiveWaterCalcTitle: { en: "Water Calculator", ar: "حاسبة المياه" },
+  deepDiveWaterCalcSub: { en: "thousand m³/month", ar: "ألف م³/شهر" },
+  waterFarmsOverQuotaTemplate: { en: "{count} farms over quota", ar: "{count} مزرعة تجاوزت الحصة" },
+  // "{count} of {total}" - the Water Calculator card's allocation line.
+  waterFarmsAboveAllocationTemplate: { en: "{count} of {total} farms above allocation", ar: "{count} من أصل {total} مزرعة تجاوزت الحصة المخصصة" },
+  structuresCountTemplate: { en: "{count} structures", ar: "{count} منشأة" },
+  // Holding-records drilldown under the deep-dive cards.
+  drilldownEyebrow: { en: "Detailed Holding Records", ar: "سجلات الحيازات التفصيلية" },
+  drilldownSeasonalTitle: { en: "Seasonal Crop Drilldown", ar: "تفصيل المحاصيل الموسمية" },
+  drilldownIerTitle: { en: "Irrigation Efficiency Drilldown", ar: "تفصيل كفاءة الري" },
+  drilldownYieldTitle: { en: "Yield Forecast Drilldown", ar: "تفصيل توقعات الإنتاجية" },
+  drilldownTreeHealthTitle: { en: "Tree Health Drilldown", ar: "تفصيل صحة الأشجار" },
+  drilldownStructuresTitle: { en: "Agricultural Structure Drilldown", ar: "تفصيل المنشآت الزراعية" },
+  drilldownWaterTitle: { en: "Water Calculator Drilldown", ar: "تفصيل حاسبة المياه" },
+  drilldownSearchPlaceholder: { en: "Search farm, crop or variety...", ar: "ابحث عن مزرعة أو محصول أو صنف..." },
+  drilldownClose: { en: "Close", ar: "إغلاق" },
+  drilldownColFarm: { en: "Farm Name", ar: "اسم المزرعة" },
+  drilldownColRegion: { en: "Region", ar: "المنطقة" },
+  drilldownColCrop: { en: "Crop", ar: "المحصول" },
+  drilldownColTrees: { en: "No. of Trees", ar: "عدد الأشجار" },
+  drilldownColVariety: { en: "Variety", ar: "الصنف" },
+  drilldownColYield: { en: "Yield (T)", ar: "الإنتاج (طن)" },
+  drilldownColWater: { en: "Water Demand (m³/month)", ar: "الطلب المائي (م³/شهر)" },
+  // Tree Health drilldown only: the Yield column becomes this instead.
+  drilldownColChi: { en: "Canopy Health Index", ar: "مؤشر صحة المظلة الشجرية" },
+  drilldownColIer: { en: "IER", ar: "IER" },
+  drilldownChiNoScore: { en: "No score", ar: "لا توجد نتيجة" },
+  drilldownColArea: { en: "Area", ar: "المساحة" },
+  drilldownColAction: { en: "Action", ar: "إجراء" },
+  drilldownAdvisoryActive: { en: "Advisory Active", ar: "إرشاد نشط" },
+  drilldownOpenFarm: { en: "Open farm detail", ar: "فتح تفاصيل المزرعة" },
+  drilldownLoading: { en: "Loading holding records…", ar: "جارٍ تحميل سجلات الحيازات…" },
+  drilldownError: { en: "Couldn't load the holding records.", ar: "تعذّر تحميل سجلات الحيازات." },
+  drilldownEmpty: { en: "No farms match your search.", ar: "لا توجد مزارع مطابقة لبحثك." },
+  deepDiveViewHoldings: { en: "View holdings", ar: "عرض الحيازات" },
+
+  // FarmRankingSection
+  rankingCardTitle: {
+    en: "Farm ranking",
+    ar: "ترتيب المزارع",
+  },
+  rankingCardSubtitle: {
+    en: "Farms ranked by current health, yield, irrigation efficiency (IER) and water demand.",
+    ar: "ترتيب المزارع حسب الصحة والإنتاجية وكفاءة الري (IER) والطلب على المياه الحالية.",
+  },
+  rankingAvgHealthLabel: { en: "Health", ar: "الصحة" },
+  rankingAvgYieldLabel: { en: "Yield", ar: "الإنتاجية" },
+  rankingAvgIerLabel: { en: "Irrigation efficiency", ar: "كفاءة الري" },
+  rankingAvgWaterLabel: { en: "Water", ar: "المياه" },
+  rankingOrderLabel: { en: "Ranking order", ar: "ترتيب النتائج" },
+  // Farm health is two different indexes: NDVI covers the whole farm (crops included),
+  // CHI covers its palms only. A farm shows whichever it has, so each is named.
+  rankingPanelHealth: { en: "Health", ar: "الصحة" },
+  rankingPanelHealthNdvi: { en: "Mean NDVI", ar: "متوسط NDVI" },
+  rankingPanelHealthChi: { en: "Canopy health index", ar: "مؤشر صحة المظلة الشجرية" },
+  rankingUnitNdvi: { en: "NDVI", ar: "NDVI" },
+  rankingUnitChi: { en: "CHI", ar: "CHI" },
+  // Under a card's health bar(s), only when the farm lacks one of the two indexes.
+  rankingNoteNoPalms: { en: "No palms on this farm, so CHI does not apply.", ar: "لا توجد نخيل في هذه المزرعة، لذا لا ينطبق CHI." },
+  rankingNoteNoChiYet: {
+    en: "CHI not available yet: too few palms with a clear reading.",
+    ar: "CHI غير متاح بعد: عدد النخيل ذات القراءة الصافية قليل.",
+  },
+  rankingNotePalmsOnly: { en: "Palms only on this farm, so health is shown as CHI.", ar: "نخيل فقط في هذه المزرعة، لذا تُعرض الصحة بمؤشر CHI." },
+  rankingPanelYield: { en: "Yield", ar: "الإنتاجية" },
+  rankingPanelIer: { en: "Irrigation efficiency (IER)", ar: "كفاءة الري (IER)" },
+  rankingPanelWater: { en: "Water vs quota", ar: "المياه مقابل الحصة" },
+  rankingTonnesPerArea: { en: "t/{unit}", ar: "طن/{unit}" },
+  // "{line}" is the subsidy line (lib/scores.ts).
+  // A card's grey line for a farm below the subsidy line: a fact from its IER alone, never advice.
+  rankingFindingBelowLine: {
+    en: "Below the IER subsidy line of {line}",
+    ar: "أقل من حد الدعم لكفاءة الري (IER) البالغ {line}",
+  },
+  rankingSubsidyLine: { en: "Subsidy line {line}", ar: "حد الدعم {line}" },
+  rankingStatusOptimal: { en: "Optimal", ar: "مثالي" },
+  rankingStatusWatch: { en: "Watch", ar: "قيد المراقبة" },
+  rankingStatusAttention: { en: "Attention", ar: "يتطلب اهتمامًا" },
+  farmRegionTemplate: { en: "{region} region", ar: "منطقة {region}" },
+  rankingLatestPass: { en: "Latest satellite pass", ar: "آخر مرور ساتلي" },
+  rankingNextAcquisition: { en: "Next acquisition", ar: "الالتقاط التالي" },
+  rankingInDaysTemplate: { en: "in {days} days ({date})", ar: "خلال {days} أيام ({date})" },
+  rankingInspectButton: { en: "Open farm detail", ar: "فتح تفاصيل المزرعة" },
+  rankingMetricLabel: { en: "Rank by", ar: "الترتيب حسب" },
+  rankingOrderTopShort: { en: "Top", ar: "الأعلى" },
+  rankingOrderBottomShort: { en: "Bottom", ar: "الأدنى" },
+  rankingLayoutOverview: { en: "Overview", ar: "نظرة عامة" },
+  rankingOpenShort: { en: "Open", ar: "فتح" },
+  rankingOfQuota: { en: "{pct}% of quota", ar: "{pct}% من الحصة" },
+  rankingAreaLabel: { en: "Area", ar: "المساحة" },
+  rankingDeliveryLabel: { en: "Delivery", ar: "طريقة الري" },
+  rankingFieldsLabel: { en: "Fields", ar: "الحقول" },
+  rankingWaterQuotaLabel: { en: "Share of quota", ar: "الحصة المستهلكة" },
+  // One muted line under the toolbar: which end of the list, by which measure, and how many farms.
+  rankingSummaryTemplate: { en: "{line} · {count} farms", ar: "{line} · {count} مزرعة" },
+  rankingSummaryHealthTop: { en: "Highest health first", ar: "الأعلى صحة أولًا" },
+  rankingSummaryHealthLow: { en: "Lowest health first", ar: "الأدنى صحة أولًا" },
+  rankingSummaryYieldTop: { en: "Highest yield first", ar: "الأعلى إنتاجية أولًا" },
+  rankingSummaryYieldLow: { en: "Lowest yield first", ar: "الأدنى إنتاجية أولًا" },
+  rankingSummaryIerTop: { en: "Highest irrigation efficiency first", ar: "الأعلى كفاءة ري أولًا" },
+  rankingSummaryIerLow: { en: "Lowest irrigation efficiency first", ar: "الأدنى كفاءة ري أولًا" },
+  rankingSummaryWaterTop: { en: "Most water optimized first", ar: "الأكثر ترشيدًا للمياه أولًا" },
+  rankingSummaryWaterLow: { en: "Least water optimized first", ar: "الأقل ترشيدًا للمياه أولًا" },
+  rankingSummaryOverviewTop: { en: "Top five farms for each measure", ar: "أفضل خمس مزارع لكل مؤشر" },
+  rankingSummaryOverviewLow: { en: "Bottom five farms for each measure", ar: "أدنى خمس مزارع لكل مؤشر" },
+  rankingNoFarms: { en: "No farms match.", ar: "لا توجد مزارع مطابقة." },
+  // Ranking cards and metric panels
+  rankingLayoutLabel: { en: "Table, cards or overview", ar: "جدول أو بطاقات أو نظرة عامة" },
+  rankingLayoutCards: { en: "Cards", ar: "بطاقات" },
+  rankingLayoutTable: { en: "Table", ar: "جدول" },
+  rankingSearchPlaceholderPlain: { en: "Search farms…", ar: "ابحث عن مزرعة…" },
+  // "{metric}" is one of the rankingBanner* names below, e.g. "HEALTH".
+  rankingGridHealthTitle: { en: "Health (mean NDVI)", ar: "الصحة (متوسط NDVI)" },
+  rankingGridHealthTop: { en: "Highest mean NDVI", ar: "أعلى متوسط NDVI" },
+  rankingGridHealthLow: { en: "Lowest mean NDVI", ar: "أدنى متوسط NDVI" },
+  rankingGridYieldTitle: { en: "Yield", ar: "الإنتاجية" },
+  rankingGridYieldTop: { en: "Top volume producers", ar: "الأعلى إنتاجًا" },
+  rankingGridYieldLow: { en: "Lowest volume producers", ar: "الأدنى إنتاجًا" },
+  rankingGridIerTitle: { en: "Irrigation efficiency", ar: "كفاءة الري" },
+  rankingGridIerTop: { en: "Top irrigation precision", ar: "أعلى دقة في الري" },
+  rankingGridIerLow: { en: "Lowest irrigation precision", ar: "أدنى دقة في الري" },
+  rankingGridWaterTitle: { en: "Water demand", ar: "الطلب على المياه" },
+  rankingGridWaterTop: { en: "Most water optimized", ar: "الأكثر ترشيدًا للمياه" },
+  rankingGridWaterLow: { en: "Least water optimized", ar: "الأقل ترشيدًا للمياه" },
+  rankingWaterUnitLabel: { en: "Water unit", ar: "وحدة المياه" },
+  rankingRosterHealth: { en: "View full health list", ar: "عرض قائمة الصحة كاملة" },
+  rankingRosterYield: { en: "View full yield list", ar: "عرض قائمة الإنتاجية كاملة" },
+  rankingRosterIer: { en: "View full irrigation efficiency list", ar: "عرض قائمة كفاءة الري كاملة" },
+  rankingRosterWater: { en: "View full water list", ar: "عرض قائمة المياه كاملة" },
+  rankingDaily: { en: "Daily:", ar: "يوميًا:" },
+  rankingWeekly: { en: "Weekly:", ar: "أسبوعيًا:" },
+  // Yield / Water metric boxes on the ranking cards
+  rankingYieldTotal: { en: "Total yield", ar: "إجمالي الإنتاج" },
+  rankingYieldCrop: { en: "Crop yield", ar: "إنتاج المحاصيل" },
+  rankingYieldDate: { en: "Date palm yield", ar: "إنتاج نخيل التمر" },
+  rankingYieldFruit: { en: "Fruit tree yield", ar: "إنتاج أشجار الفاكهة" },
+  rankingProductivity: { en: "Productivity", ar: "الإنتاجية" },
+  // "{area}" is the farm's area in dunums, e.g. "370.5".
+  rankingWaterDaily: { en: "Daily", ar: "يومي" },
+  rankingWaterWeekly: { en: "Weekly", ar: "أسبوعي" },
+  rankingWaterMonthly: { en: "Monthly demand", ar: "الطلب الشهري" },
+  rankingLiters: { en: "Liters", ar: "لتر" },
+  rankingWaterOptimized: { en: "Optimized", ar: "مُحسَّن" },
+  rankingWaterWithin: { en: "Within quota", ar: "ضمن الحصة" },
+  rankingWaterOver: { en: "Over quota", ar: "تجاوز الحصة" },
+  // "{method}" e.g. "Precision Pivot & Drip"; "{count}" a number of fields.
+  rankingColRank: { en: "Rank", ar: "الترتيب" },
+  rankingColFarm: { en: "Farm", ar: "المزرعة" },
+  rankingColStatus: { en: "Status", ar: "الحالة" },
+  rankingColCrops: { en: "Crops", ar: "المحاصيل" },
+} as const satisfies Dict;
+
+export const THEMATIC_LABEL_KEY: Record<string, keyof typeof STRINGS> = {
+  landUse: "thematicLabelLandUse",
+  cropType: "thematicLabelCropType",
+  treeType: "thematicLabelTreeType",
+};
+
+export const THEMATIC_BADGE_KEY: Record<string, keyof typeof STRINGS> = {
+  landUse: "thematicBadgeLandUse",
+  cropType: "thematicBadgeCropType",
+  treeType: "thematicBadgeTreeType",
+};
+
+export const THEMATIC_DESC_KEY: Record<string, keyof typeof STRINGS> = {
+  landUse: "thematicDescLandUse",
+  cropType: "thematicDescCropType",
+  treeType: "thematicDescTreeType",
+};
+
+export const LAND_USE_CLASS_LABEL_KEY: Record<LandUseClass, keyof typeof STRINGS> = {
+  open_agriculture: "landUseOpenAgriculture",
+  protected_agriculture: "landUseProtectedAgriculture",
+  structures: "landUseStructures",
+  barren_land: "landUseBarrenLand",
+  fallow_land: "landUseFallowLand",
+};
+
+export type FarmStringKey = keyof typeof STRINGS;

@@ -1,0 +1,12 @@
+/.next/
+/out/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+
+# Local env files
+.env*.local
+
+# Built by `npm run build:mock` (service worker + placeholder backend)
+/public/mock-sw.js
+/node_modules/

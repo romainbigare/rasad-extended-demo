@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": false,
+    "noImplicitAny": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+
+      "@shared/auth/AuthContext": ["src/lib/authShim"],
+      "@shared/geo/geoProxy": ["src/lib/geoProxy"],
+      "@shared/geo/farmData": ["src/containers/ExecutiveDashboard/map/farmData"],
+      "@shared/geo/fieldData": ["src/containers/ExecutiveDashboard/map/fieldData"],
+      "@shared/farm/endpoints": ["src/lib/network/farm/endpoints"],
+      "@shared/weather/endpoints": ["src/lib/network/weather/endpoints"],
+      "@shared/network/rbacRequest": ["src/lib/network/rbac/request"],
+      "@shared/network/rbacEndpoints": ["src/lib/network/rbac/endpoints"],
+      "@shared/tokens/rbacToken": ["src/lib/utils/auth/rbacToken"],
+      "@shared/export/csvExport": ["src/containers/ExecutiveDashboard/utils/csvExport"],
+
+      "lib/*": ["src/lib/*"],
+      "configs/*": ["src/configs/*"],
+      "context/*": ["src/context/*"],
+      "hooks/*": ["src/hooks/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules"]
+}

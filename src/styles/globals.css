@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* RASAD palette, as RGB channels (see tailwind.config.js). */
+:root {
+  /* bg #F4F7F6, ink #04303B, muted #667876, line #DDE5E2, teal #04303B. */
+  --bg: 244 247 246;
+  --panel: 255 255 255;
+  --ink: 4 48 59;
+  --muted: 102 120 118;
+  --line: 221 229 226;
+
+  --teal: 4 48 59;
+  --teal-2: 28 63 74;
+  --teal-3: 38 80 92;
+
+  /* Greens: accent #4FB840, dark #006E01. */
+  --green: 79 184 64;
+  --green-d: 0 110 1;
+  --green-l: 232 245 228;
+  --blue: 59 130 196;
+  --blue-l: 230 240 250;
+  --orange: 232 145 58;
+  --orange-l: 253 240 227;
+  --orange-d: 183 100 19;
+  --red: 192 57 43;
+  --red-l: 251 233 231;
+  --yellow: 242 210 75;
+  --slate: 71 85 105;
+  --slate-l: 238 241 243;
+
+  --on-dark-label: 207 224 220;
+  --on-dark-sub: 159 184 179;
+  --on-dark-green: 168 227 154;
+  --on-dark-blue: 127 185 234;
+  --on-dark-orange: 240 177 105;
+  --on-dark-purple: 199 166 242;
+}
+
+@layer base {
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    font-size: 13px;
+  }
+  button {
+    font-family: inherit;
+  }
+}
+
+@layer components {
+  .section-label {
+    @apply text-[10px] font-bold uppercase tracking-[0.08em] text-muted;
+  }
+}
+
+/* Phones (and 400% browser zoom): no text under 12px. Desktop keeps the design's 10-11px captions.
+ * Outside the layers on purpose, so it wins over the matching utilities. */
+@media (max-width: 639px) {
+  .text-\[10px\],
+  .text-\[11px\],
+  .section-label {
+    font-size: 12px;
+  }
+}
+
+/* Phones: text fields at 16px - iOS Safari zooms the whole page into any smaller input on focus.
+ * The :not()s lift specificity above a single utility class (text-xs, text-[13px]) so this wins. */
+@media (max-width: 767px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  textarea:not([data-keep-size]),
+  select:not([data-keep-size]) {
+    font-size: 16px;
+  }
+}
+
+/* Wide data tables below 1280px (where they scroll sideways): the first column - the farm / field /
+ * species a row is about - stays put. Opt in with `table-sticky-first` on the <table>. */
+@media (max-width: 1279px) {
+  .table-sticky-first tr > :first-child:not([colspan]) {
+    position: sticky;
+    inset-inline-start: 0;
+    z-index: 1;
+    background-color: rgb(var(--panel));
+    box-shadow: inset -1px 0 0 rgb(var(--line));
+  }
+  [dir="rtl"] .table-sticky-first tr > :first-child:not([colspan]) {
+    box-shadow: inset 1px 0 0 rgb(var(--line));
+  }
+  /* The pinned header cell keeps the grey header row; a hovered row keeps its tint (#F4F7F6). */
+  .table-sticky-first thead tr > :first-child {
+    background-color: #f4f7f6;
+  }
+  .table-sticky-first tbody tr:hover > :first-child:not([colspan]) {
+    background-color: #f4f7f6;
+  }
+  /* Keep the row's own highlight on the pinned cell. */
+  .table-sticky-first tr.cursor-pointer:hover > :first-child:not([colspan]) {
+    background-color: #f4f7f6;
+  }
+  .table-sticky-first tr[aria-current="true"] > :first-child:not([colspan]) {
+    background-color: rgb(var(--green-l));
+  }
+}
+
+
+/* Login photo layer (containers/Login): the photo at its own shape, scaled to cover its panel like
+ * background-size: cover, and anchored by the per-photo variables pickLoginBackground sets. The RASAD
+ * panel and "Powered by" line inside it are placed in % of the photo, so they stick to it. */
+.login-photo {
+  --login-photo-w: max(100cqw, calc(100cqh * var(--login-bg-ratio, 1.333)));
+  width: var(--login-photo-w);
+  aspect-ratio: var(--login-bg-ratio, 1.333);
+  left: calc((100cqw - var(--login-photo-w)) * var(--login-bg-x, 0));
+  top: calc((100cqh - var(--login-photo-w) / var(--login-bg-ratio, 1.333)) * var(--login-bg-y, 0.5));
+  /* 16px on a 1200px-wide photo; never too small on a phone banner or too big on 4K. */
+  font-size: clamp(11px, calc(var(--login-photo-w) / 75), 20px);
+}
+@media (min-width: 950px) {
+  .login-photo {
+    top: calc((100cqh - var(--login-photo-w) / var(--login-bg-ratio, 1.333)) * var(--login-bg-y-wide, var(--login-bg-y, 0.5)));
+  }
+}
+
+/* Printing "What to check" on Farm Monitoring: only the list and the farm's name. The class is on <html> only
+ * while that tab prints (see CheckTab), so Ctrl+P on any other page prints the page as it is. Everything that is
+ * neither the print area, inside it, nor a parent of it is taken out of the layout (display none, no blank pages). */
+@media print {
+  html.printing-findings body *:not([data-print-area]):not([data-print-area] *):not(:has([data-print-area])) {
+    display: none !important;
+  }
+}
