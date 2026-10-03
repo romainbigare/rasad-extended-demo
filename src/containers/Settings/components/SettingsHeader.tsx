@@ -1,8 +1,6 @@
 import { useAuth } from "@shared/auth/AuthContext";
 import { Settings } from "lucide-react";
 
-import { LogoutIcon } from "@/components/AppShell/icons";
-import { Button } from "@/components/ui/Button";
 import { TitleIcon } from "@/components/ui/TitleIcon";
 import { useT } from "@/lib/i18n/createDict";
 
