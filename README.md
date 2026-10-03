@@ -11,7 +11,7 @@ Live site: https://romainbigare.github.io/rasad-extended-demo/
 - **No backend.** A service worker (`public/mock-sw.js`, bundled from `demo/` by `npm run build:mock`)
   answers every request under `<base>/__mock/` with deterministic, generated data: 3 regions, 40 listed farms,
   243 fields, emirate totals scaled to 24,082 farms. First load registers the worker, then the app starts.
-- **Signed in automatically** with a placeholder session. Any login works if you log out.
+- **No sign-in.** The app opens straight on the Executive View with a placeholder session; the login and register pages redirect there and there is no log-out.
 - **Maps** use [Esri World Imagery](https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9)
   as the satellite basemap (demo build only; the production app uses the Google Map Tiles API). Crop type, land use and
   tree overlays are drawn by the service worker from the same placeholder farms (`demo/wms-render.js`); zoom into a farm

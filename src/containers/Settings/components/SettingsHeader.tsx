@@ -26,15 +26,6 @@ export function SettingsHeader() {
         </h1>
         <p className="mb-0 mt-1 text-xs text-muted">{t("loggedInAs").replace("{name}", name).replace("{role}", role)}</p>
       </div>
-      {/* Log out lives here (not in the menu): a quiet outlined button, red text only. */}
-      <Button
-        onClick={() => auth?.logout()}
-        data-testid="settings-logout"
-        className="border-[#f2b8b0] text-red hover:bg-red-l"
-      >
-        <LogoutIcon className="flex-none" />
-        {t("logOutButton")}
-      </Button>
     </div>
   );
 }
